@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newlook Salon — Karachi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black:      #0d0b0b;
+      --brown:      #2b1d14;
+      --gold:       #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim:   #a07830;
+      --pink:       #f2c4ce;
+      --pink-soft:  #fdeef1;
+      --white:      #faf8f5;
+      --grey:       #c5bfba;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Jost', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+    /* ── NAV ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: transparent;
+      transition: background .4s ease, padding .4s ease;
+    }
+    nav.scrolled {
+      background: rgba(13,11,11,.92);
+      backdrop-filter: blur(12px);
+      padding: 1rem 4rem;
+      border-bottom: 1px solid rgba(201,168,76,.18);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 300;
+      letter-spacing: .18em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--grey);
+      text-decoration: none;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1px;
+      background: var(--gold); transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(13,11,11,.97); flex-direction: column;
+      align-items: center; justify-content: center; gap: 2.4rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif); font-size: 2rem; font-weight: 300;
+      letter-spacing: .12em; color: var(--white); text-decoration: none;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    #hero {
+      min-height: 100dvh;
+      background: var(--brown);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+
+    /* layered texture */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,168,76,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 90% 80% at 20% 80%, rgba(242,196,206,.06) 0%, transparent 60%);
+    }
+
+    /* gold vertical lines */
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(201,168,76,.05) 60px);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+      animation: fadeUp .9s ease both;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.6rem;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.6rem, 9vw, 8rem);
+      font-weight: 300; line-height: 1.02;
+      letter-spacing: .04em;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-style: italic; font-weight: 300;
+      color: var(--pink); margin-bottom: 3rem;
+      letter-spacing: .06em;
+    }
+
+    .divider-gold {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-bottom: 3rem;
+    }
+    .divider-gold span { display: block; height: 1px; width: 60px; background: var(--gold-dim); }
+    .divider-gold i { color: var(--gold); font-size: .75rem; letter-spacing: .1em; font-style: normal; }
+
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: .7rem;
+      padding: .9rem 2.4rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--sans); font-size: .72rem;
+      font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .25s, transform .2s;
+      border: none; cursor: pointer;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--black); }
+
+    /* hero scroll hint */
+    .scroll-hint {
+      position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      opacity: .5; animation: bounce 2s ease infinite;
+    }
+    .scroll-hint span { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
+    .scroll-hint svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; }
+
+    /* ── SECTIONS SHARED ──────────────────────────────── */
+    section { padding: 7rem 4rem; }
+
+    .section-label {
+      font-family: var(--sans); font-size: .65rem; font-weight: 500;
+      letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300; line-height: 1.1; color: var(--white);
+      margin-bottom: 1.8rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    .thin-rule {
+      width: 48px; height: 1px; background: var(--gold-dim);
+      margin-bottom: 2rem;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────── */
+    #about {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative; aspect-ratio: 3/4; max-height: 560px;
+    }
+    .about-frame {
+      width: 100%; height: 100%;
+      background: var(--brown);
+      position: relative; overflow: hidden;
+    }
+    /* decorative grid pattern */
+    .about-frame::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .about-frame-inner {
+      position: absolute; inset: 2rem;
+      border: 1px solid rgba(201,168,76,.25);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.6rem;
+    }
+    .salon-icon {
+      font-family: var(--serif); font-size: 5rem; color: rgba(201,168,76,.18);
+      line-height: 1; user-select: none;
+    }
+    .about-quote {
+      font-family: var(--serif); font-size: 1.15rem;
+      font-style: italic; color: rgba(250,248,245,.4);
+      text-align: center; padding: 0 2rem;
+      line-height: 1.7; letter-spacing: .02em;
+    }
+    /* gold corner accents */
+    .about-visual::before, .about-visual::after {
+      content: ''; position: absolute;
+      width: 28px; height: 28px;
+      border-color: var(--gold); border-style: solid;
+    }
+    .about-visual::before {
+      top: -8px; left: -8px;
+      border-width: 1px 0 0 1px;
+    }
+    .about-visual::after {
+      bottom: -8px; right: -8px;
+      border-width: 0 1px 1px 0;
+    }
+
+    .about-text p {
+      font-size: 1rem; line-height: 1.9; color: var(--grey);
+      margin-bottom: 1.4rem;
+    }
+    .about-text p strong {
+      color: var(--white); font-weight: 400;
+    }
+
+    .about-badges {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;
+    }
+    .badge {
+      padding: .45rem 1.1rem;
+      border: 1px solid rgba(201,168,76,.35);
+      font-family: var(--sans); font-size: .65rem;
+      font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── SERVICES ──────────────────────────────────────── */
+    #services {
+      background: var(--brown);
+      position: relative; overflow: hidden;
+    }
+    #services::before {
+      content: '';
+      position: absolute; top: 0; right: -120px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .services-header { text-align: center; margin-bottom: 4.5rem; }
+    .services-header .thin-rule { margin: 0 auto 2rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(201,168,76,.12);
+      max-width: 1100px; margin: 0 auto;
+    }
+    .service-card {
+      background: var(--brown);
+      padding: 3rem 2.4rem;
+      position: relative; overflow: hidden;
+      transition: background .3s;
+    }
+    .service-card:hover { background: rgba(43,29,20,.6); }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      height: 2px; width: 0; background: var(--gold);
+      transition: width .4s ease;
+    }
+    .service-card:hover::after { width: 100%; }
+
+    .service-num {
+      font-family: var(--serif); font-size: 4rem;
+      font-weight: 300; color: rgba(201,168,76,.12);
+      line-height: 1; margin-bottom: 1.2rem;
+      transition: color .3s;
+    }
+    .service-card:hover .service-num { color: rgba(201,168,76,.22); }
+
+    .service-name {
+      font-family: var(--serif); font-size: 1.55rem;
+      font-weight: 300; color: var(--white); margin-bottom: 1.4rem;
+      letter-spacing: .02em;
+    }
+
+    .service-list {
+      list-style: none; display: flex; flex-direction: column; gap: .55rem;
+    }
+    .service-list li {
+      font-family: var(--sans); font-size: .82rem;
+      font-weight: 300; letter-spacing: .06em;
+      color: var(--grey);
+      padding-left: 1.1rem; position: relative;
+    }
+    .service-list li::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 4px; height: 1px; background: var(--gold-dim);
+    }
+
+    /* ── GALLERY ───────────────────────────────────────── */
+    #gallery {
+      background: var(--black);
+      padding: 7rem 4rem;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .gallery-header .thin-rule { margin: 0 auto 2rem; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* First photo spans 2 cols, 2 rows — hero gallery image */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--brown);
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s ease, filter .4s ease;
+      filter: brightness(.88) saturate(.9);
+      min-height: 220px;
+    }
+    .gallery-item:first-child img { min-height: 460px; }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(.75) saturate(1.1);
+    }
+
+    /* gold overlay label */
+    .gallery-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.4rem 1.6rem .9rem;
+      background: linear-gradient(to top, rgba(13,11,11,.85) 0%, transparent 100%);
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: .04em;
+      transform: translateY(4px);
+      opacity: 0;
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .gallery-item:hover .gallery-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* thin gold border on hover */
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      border: 1px solid transparent;
+      transition: border-color .35s;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .gallery-item:hover::after {
+      border-color: rgba(201,168,76,.45);
+    }
+
+    @media (max-width: 900px) {
+      #gallery { padding: 5rem 2rem; }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery-item:first-child {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+      .gallery-item:first-child img { min-height: 280px; }
+      .gallery-label { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    }
+
+    /* ── CONTACT ───────────────────────────────────────── */
+    #contact {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+
+    .contact-item {
+      display: flex; flex-direction: column; gap: .4rem;
+    }
+    .contact-item-label {
+      font-family: var(--sans); font-size: .62rem;
+      font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+    .contact-item-value {
+      font-family: var(--serif); font-size: 1.15rem;
+      font-weight: 300; color: var(--white); line-height: 1.5;
+    }
+    .contact-item-value a { color: var(--white); text-decoration: none; transition: color .2s; }
+    .contact-item-value a:hover { color: var(--gold); }
+
+    .hours-grid {
+      display: flex; flex-direction: column; gap: .3rem; margin-top: .3rem;
+    }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      font-family: var(--sans); font-size: .82rem;
+      color: var(--grey); padding-bottom: .3rem;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .hours-row span:last-child { color: var(--gold); }
+
+    .contact-cta {
+      background: var(--brown);
+      padding: 3.5rem;
+      position: relative;
+      border-top: 2px solid var(--gold);
+    }
+    .contact-cta p {
+      font-family: var(--sans); font-size: .9rem;
+      line-height: 1.8; color: var(--grey); margin-bottom: 2rem;
+    }
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: .8rem;
+      padding: 1rem 2.2rem;
+      background: #25D366; color: var(--white);
+      font-family: var(--sans); font-size: .72rem;
+      font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .25s, transform .2s;
+    }
+    .wa-btn:hover { background: #1ebe58; transform: translateY(-2px); }
+    .wa-btn svg { width: 18px; height: 18px; fill: var(--white); flex-shrink: 0; }
+
+    .insta-link {
+      display: inline-flex; align-items: center; gap: .6rem;
+      margin-top: 1.5rem;
+      font-family: var(--sans); font-size: .72rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      transition: color .2s;
+    }
+    .insta-link:hover { color: var(--gold-light); }
+    .insta-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      background: #080606;
+      padding: 3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+      border-top: 1px solid rgba(201,168,76,.12);
+    }
+    .footer-logo {
+      font-family: var(--serif); font-size: 1.2rem;
+      font-weight: 300; letter-spacing: .2em;
+      color: var(--gold); text-transform: uppercase;
+    }
+    .footer-copy {
+      font-family: var(--sans); font-size: .65rem;
+      letter-spacing: .12em; color: rgba(197,191,186,.35);
+    }
+    .footer-line {
+      display: flex; align-items: center; gap: .8rem;
+    }
+    .footer-line span { font-size: .6rem; color: rgba(201,168,76,.3); }
+
+    /* ── ANIMATIONS ────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(6px); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      nav.scrolled { padding: .9rem 2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      section { padding: 5rem 2rem; }
+
+      #about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .about-visual { max-height: 320px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 2.2rem 1.8rem; }
+
+      #contact {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      footer {
+        padding: 2rem;
+        flex-direction: column; align-items: flex-start;
+        gap: .8rem;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .hero-title { font-size: 3.2rem; }
+      .about-badges { gap: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────── -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Newlook Salon</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- mobile overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Est. Karachi &nbsp;·&nbsp; Beauty &amp; Elegance</p>
+      <h1 class="hero-title">New<em>look</em><br>Salon</h1>
+      <p class="hero-sub">Where Beauty Meets Expertise</p>
+      <div class="divider-gold">
+        <span></span><i>✦</i><span></span>
+      </div>
+      <a href="#contact" class="btn-gold">Book an Appointment</a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ─────────────────────────────────────────── -->
+  <section id="about">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <div class="about-frame-inner">
+          <div class="salon-icon">✦</div>
+          <p class="about-quote">"We don't just enhance your look — we elevate your confidence."</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">Beauty Meets <em>Expertise</em></h2>
+      <div class="thin-rule"></div>
+      <p>
+        At <strong>Newlook Salon</strong>, we offer a complete range of services designed to help you look and feel your best in a modern, welcoming space.
+      </p>
+      <p>
+        Our team of skilled professionals brings artistry and precision to every service — from transformative hair treatments to radiant skin care and flawless bridal looks.
+      </p>
+      <p>
+        We believe beauty is a form of confidence. Every visit is crafted to leave you feeling refreshed, radiant, and truly yourself.
+      </p>
+      <div class="about-badges">
+        <div class="badge">Hair</div>
+        <div class="badge">Skin &amp; Spa</div>
+        <div class="badge">Makeup</div>
+        <div class="badge">Bridal</div>
+        <div class="badge">Styling</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ──────────────────────────────────────── -->
+  <section id="services">
+    <div class="services-header reveal">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Our <em>Services</em></h2>
+      <div class="thin-rule"></div>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Spa & Skin -->
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <h3 class="service-name">Spa &amp; Skin</h3>
+        <ul class="service-list">
+          <li>Facials</li>
+          <li>Spa Treatments</li>
+          <li>Manicures</li>
+          <li>Pedicures</li>
+        </ul>
+      </div>
+
+      <!-- Hair -->
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <h3 class="service-name">Hair</h3>
+        <ul class="service-list">
+          <li>Advanced Treatments</li>
+          <li>Hair Transformations</li>
+          <li>Keratin Treatments</li>
+          <li>Nanoplastia &amp; Hair Botox</li>
+          <li>Precision Coloring</li>
+          <li>Balayage &amp; Streaking</li>
+        </ul>
+      </div>
+
+      <!-- Makeup & Styling -->
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <h3 class="service-name">Makeup &amp; Styling</h3>
+        <ul class="service-list">
+          <li>Bridal Makeup</li>
+          <li>Reception Makeup</li>
+          <li>Party Glam</li>
+          <li>Soft &amp; Natural Makeup</li>
+          <li>Model Makeup</li>
+          <li>Professional Hairstyling</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── GALLERY ───────────────────────────────────────── -->
+  <section id="gallery">
+    <div class="gallery-header reveal">
+      <p class="section-label">Inside the Salon</p>
+      <h2 class="section-title">The <em>Experience</em></h2>
+      <div class="thin-rule"></div>
+    </div>
+
+    <div class="gallery-grid">
+
+      <!-- Large feature: Facial / Spa -->
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80&fit=crop"
+          alt="Woman receiving a relaxing facial treatment at Newlook Salon"
+          loading="lazy"
+        />
+        <div class="gallery-label">Facial &amp; Skin Treatment</div>
+      </div>
+
+      <!-- Manicure -->
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop"
+          alt="Manicure nail care at Newlook Salon"
+          loading="lazy"
+        />
+        <div class="gallery-label">Manicure</div>
+      </div>
+
+      <!-- Pedicure -->
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&q=80&fit=crop"
+          alt="Pedicure foot care treatment at Newlook Salon"
+          loading="lazy"
+        />
+        <div class="gallery-label">Pedicure</div>
+      </div>
+
+      <!-- Hair Treatment -->
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&fit=crop"
+          alt="Professional hair treatment at Newlook Salon"
+          loading="lazy"
+        />
+        <div class="gallery-label">Hair Treatment</div>
+      </div>
+
+      <!-- Makeup -->
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80&fit=crop"
+          alt="Professional makeup application at Newlook Salon"
+          loading="lazy"
+        />
+        <div class="gallery-label">Makeup &amp; Styling</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="contact-info reveal">
+      <p class="section-label">Reach Us</p>
+      <h2 class="section-title">Visit <em>Us</em></h2>
+      <div class="thin-rule"></div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Location</span>
+        <span class="contact-item-value">
+          392-A, Rafah-e-Aam Society<br>
+          Malir Halt, Karachi
+        </span>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <span class="contact-item-value">
+          <a href="tel:+923022604409">0302 260 4409</a>
+        </span>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Opening Hours</span>
+        <div class="hours-grid">
+          <div class="hours-row">
+            <span>Monday – Sunday</span>
+            <span>11:00 am – 9:00 pm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Follow Us</span>
+        <a href="https://www.instagram.com/newlook_beauty_salon" target="_blank" rel="noopener" class="insta-link">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          @newlook_beauty_salon
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-cta reveal">
+      <p class="section-label">Book Now</p>
+      <h3 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);">Ready for a <em>New Look?</em></h3>
+      <p>
+        Our team is ready to welcome you. Reach out via WhatsApp to schedule your appointment — we respond quickly and look forward to seeing you.
+      </p>
+      <a
+        href="https://wa.me/923022604409?text=Hello!%20I'd%20like%20to%20book%20an%20appointment%20at%20Newlook%20Salon."
+        target="_blank" rel="noopener"
+        class="wa-btn"
+      >
+        <!-- WhatsApp SVG -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.117 1.535 5.845L0 24l6.335-1.511A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.013-1.376l-.36-.214-3.732.89.935-3.628-.234-.372A9.818 9.818 0 012.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z"/>
+        </svg>
+        Book via WhatsApp
+      </a>
+      <br>
+      <a
+        href="https://www.instagram.com/newlook_beauty_salon"
+        target="_blank" rel="noopener"
+        class="insta-link"
+        style="margin-top:1.2rem"
+      >
+        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Follow on Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-line">
+      <span class="footer-logo">Newlook Salon</span>
+      <span>✦</span>
+      <span style="font-family:var(--sans);font-size:.65rem;color:rgba(197,191,186,.4);letter-spacing:.08em;">Karachi</span>
+    </div>
+    <p class="footer-copy">© 2025 Newlook Salon. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ── Navbar scroll class ──
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Hamburger ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    // ── Reveal on scroll ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 90);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
