@@ -3,911 +3,2172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Newlook Salon — Karachi</title>
+  <title>New Look Salon – Karachi's Premier Beauty Destination</title>
+  <meta name="description" content="New Look Salon by Quratulain Imran – 18+ years of luxury beauty expertise in Karachi. Book your appointment today." />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
   <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES
+    ============================================= */
     :root {
-      --black:      #0d0b0b;
-      --brown:      #2b1d14;
-      --gold:       #c9a84c;
-      --gold-light: #e8c97a;
-      --gold-dim:   #a07830;
-      --pink:       #f2c4ce;
-      --pink-soft:  #fdeef1;
-      --white:      #faf8f5;
-      --grey:       #c5bfba;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans:  'Jost', sans-serif;
+      --black:        #0a0806;
+      --black-soft:   #100d0a;
+      --brown-dark:   #2a1a0e;
+      --brown-mid:    #5c3d22;
+      --brown-light:  #8c6240;
+      --beige:        #e8ddd0;
+      --nude:         #d4b896;
+      --gold:         #c9a84c;
+      --gold-light:   #e8c97a;
+      --gold-pale:    #f5e9c8;
+      --cherry:       #d4848a;
+      --white:        #faf8f5;
+      --text-muted:   #9a8878;
+
+      --ff-serif:  'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      --ff-display:'Playfair Display', serif;
+      --ff-body:   'Jost', sans-serif;
+
+      --transition: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --glow: 0 0 30px rgba(201,168,76,0.25);
+      --shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
 
+    /* =============================================
+       RESET & BASE
+    ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       background: var(--black);
-      color: var(--white);
-      font-family: var(--sans);
+      color: var(--beige);
+      font-family: var(--ff-body);
       font-weight: 300;
+      line-height: 1.75;
       overflow-x: hidden;
     }
 
-    /* ── SCROLLBAR ─────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* =============================================
+       SCROLLBAR
+    ============================================= */
+    ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
-    /* ── NAV ───────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 4rem;
-      background: transparent;
-      transition: background .4s ease, padding .4s ease;
-    }
-    nav.scrolled {
-      background: rgba(13,11,11,.92);
-      backdrop-filter: blur(12px);
-      padding: 1rem 4rem;
-      border-bottom: 1px solid rgba(201,168,76,.18);
-    }
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 300;
-      letter-spacing: .18em;
+    /* =============================================
+       TYPOGRAPHY HELPERS
+    ============================================= */
+    .section-label {
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
       color: var(--gold);
-      text-decoration: none;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--white);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-top: 1rem;
+    }
+
+    /* =============================================
+       DIVIDER
+    ============================================= */
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .gold-divider::before,
+    .gold-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+    .gold-divider span {
+      font-size: 1.1rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--ff-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-    }
-    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
-    .nav-links a {
-      font-family: var(--sans);
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--grey);
-      text-decoration: none;
-      transition: color .25s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-
-    /* hamburger */
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; background: none; border: none; padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 24px; height: 1px;
-      background: var(--gold); transition: all .3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 99;
-      background: rgba(13,11,11,.97); flex-direction: column;
-      align-items: center; justify-content: center; gap: 2.4rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: var(--serif); font-size: 2rem; font-weight: 300;
-      letter-spacing: .12em; color: var(--white); text-decoration: none;
-      transition: color .2s;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-
-    /* ── HERO ──────────────────────────────────────────── */
-    #hero {
-      min-height: 100dvh;
-      background: var(--brown);
+      padding: 1rem 2.4rem;
+      border-radius: 0;
+      cursor: pointer;
+      transition: var(--transition);
       position: relative;
-      display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
 
-    /* layered texture */
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,168,76,.08) 0%, transparent 70%),
-        radial-gradient(ellipse 90% 80% at 20% 80%, rgba(242,196,206,.06) 0%, transparent 60%);
-    }
-
-    /* gold vertical lines */
-    #hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(201,168,76,.05) 60px);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative; z-index: 2;
-      text-align: center;
-      padding: 0 2rem;
-      animation: fadeUp .9s ease both;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: .68rem; font-weight: 500;
-      letter-spacing: .35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.6rem;
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(3.6rem, 9vw, 8rem);
-      font-weight: 300; line-height: 1.02;
-      letter-spacing: .04em;
-      color: var(--white);
-      margin-bottom: .5rem;
-    }
-    .hero-title em {
-      font-style: italic; color: var(--gold-light);
-    }
-
-    .hero-sub {
-      font-family: var(--serif);
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      font-style: italic; font-weight: 300;
-      color: var(--pink); margin-bottom: 3rem;
-      letter-spacing: .06em;
-    }
-
-    .divider-gold {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1rem; margin-bottom: 3rem;
-    }
-    .divider-gold span { display: block; height: 1px; width: 60px; background: var(--gold-dim); }
-    .divider-gold i { color: var(--gold); font-size: .75rem; letter-spacing: .1em; font-style: normal; }
-
     .btn-gold {
-      display: inline-flex; align-items: center; gap: .7rem;
-      padding: .9rem 2.4rem;
-      background: var(--gold);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
       color: var(--black);
-      font-family: var(--sans); font-size: .72rem;
-      font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
-      text-decoration: none;
-      transition: background .25s, transform .2s;
-      border: none; cursor: pointer;
+      border: none;
     }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .btn-gold:hover::before { opacity: 1; }
+    .btn-gold:hover { box-shadow: 0 0 40px rgba(201,168,76,0.45), 0 8px 25px rgba(0,0,0,0.3); transform: translateY(-2px); }
+
     .btn-outline {
       background: transparent;
       color: var(--gold);
-      border: 1px solid var(--gold);
+      border: 1px solid rgba(201,168,76,0.5);
     }
-    .btn-outline:hover { background: var(--gold); color: var(--black); }
-
-    /* hero scroll hint */
-    .scroll-hint {
-      position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: .5rem;
-      opacity: .5; animation: bounce 2s ease infinite;
-    }
-    .scroll-hint span { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
-    .scroll-hint svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; }
-
-    /* ── SECTIONS SHARED ──────────────────────────────── */
-    section { padding: 7rem 4rem; }
-
-    .section-label {
-      font-family: var(--sans); font-size: .65rem; font-weight: 500;
-      letter-spacing: .35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.2rem;
-    }
-    .section-title {
-      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 300; line-height: 1.1; color: var(--white);
-      margin-bottom: 1.8rem;
-    }
-    .section-title em { font-style: italic; color: var(--gold-light); }
-
-    .thin-rule {
-      width: 48px; height: 1px; background: var(--gold-dim);
-      margin-bottom: 2rem;
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.08);
+      border-color: var(--gold);
+      box-shadow: var(--glow);
+      transform: translateY(-2px);
     }
 
-    /* ── ABOUT ─────────────────────────────────────────── */
-    #about {
-      background: var(--black);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.4rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+
+    #navbar.scrolled {
+      background: rgba(10,8,6,0.95);
+      backdrop-filter: blur(12px);
+      padding: 0.9rem 5%;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.4);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .nav-logo-main {
+      font-family: var(--ff-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .nav-logo-sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
       align-items: center;
     }
-
-    .about-visual {
-      position: relative; aspect-ratio: 3/4; max-height: 560px;
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--beige);
+      opacity: 0.8;
+      transition: opacity 0.3s, color 0.3s;
+      position: relative;
     }
-    .about-frame {
-      width: 100%; height: 100%;
-      background: var(--brown);
-      position: relative; overflow: hidden;
-    }
-    /* decorative grid pattern */
-    .about-frame::before {
+    .nav-links a::after {
       content: '';
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(201,168,76,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,.06) 1px, transparent 1px);
-      background-size: 28px 28px;
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.35s;
     }
-    .about-frame-inner {
-      position: absolute; inset: 2rem;
-      border: 1px solid rgba(201,168,76,.25);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 1.6rem;
+    .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-size: 0.7rem !important;
+      padding: 0.65rem 1.5rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--black) !important;
+      opacity: 1 !important;
+      letter-spacing: 0.15em;
     }
-    .salon-icon {
-      font-family: var(--serif); font-size: 5rem; color: rgba(201,168,76,.18);
-      line-height: 1; user-select: none;
+    .nav-cta::after { display: none; }
+    .nav-cta:hover { box-shadow: 0 0 25px rgba(201,168,76,0.4); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
     }
-    .about-quote {
-      font-family: var(--serif); font-size: 1.15rem;
-      font-style: italic; color: rgba(250,248,245,.4);
-      text-align: center; padding: 0 2rem;
-      line-height: 1.7; letter-spacing: .02em;
+    .hamburger span {
+      display: block;
+      width: 26px; height: 1.5px;
+      background: var(--gold);
+      transition: var(--transition);
     }
-    /* gold corner accents */
-    .about-visual::before, .about-visual::after {
-      content: ''; position: absolute;
-      width: 28px; height: 28px;
-      border-color: var(--gold); border-style: solid;
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,8,6,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
     }
-    .about-visual::before {
-      top: -8px; left: -8px;
-      border-width: 1px 0 0 1px;
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--ff-serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
     }
-    .about-visual::after {
-      bottom: -8px; right: -8px;
-      border-width: 0 1px 1px 0;
+    .mobile-menu a:hover { color: var(--gold-light); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .about-text p {
-      font-size: 1rem; line-height: 1.9; color: var(--grey);
-      margin-bottom: 1.4rem;
-    }
-    .about-text p strong {
-      color: var(--white); font-weight: 400;
-    }
-
-    .about-badges {
-      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;
-    }
-    .badge {
-      padding: .45rem 1.1rem;
-      border: 1px solid rgba(201,168,76,.35);
-      font-family: var(--sans); font-size: .65rem;
-      font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--gold);
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(92,61,34,0.35) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        linear-gradient(160deg, #0a0806 0%, #1a0f07 35%, #0e0b08 65%, #080604 100%);
+      background-size: cover;
     }
 
-    /* ── SERVICES ──────────────────────────────────────── */
-    #services {
-      background: var(--brown);
-      position: relative; overflow: hidden;
-    }
-    #services::before {
-      content: '';
-      position: absolute; top: 0; right: -120px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 70%);
+    /* Animated grain overlay */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
       pointer-events: none;
     }
-    .services-header { text-align: center; margin-bottom: 4.5rem; }
-    .services-header .thin-rule { margin: 0 auto 2rem; }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: rgba(201,168,76,.12);
-      max-width: 1100px; margin: 0 auto;
+    /* Decorative lines */
+    .hero-lines {
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%;
+      height: 100%;
+      pointer-events: none;
     }
-    .service-card {
-      background: var(--brown);
-      padding: 3rem 2.4rem;
-      position: relative; overflow: hidden;
-      transition: background .3s;
+    .hero-lines::before {
+      content: '';
+      position: absolute;
+      top: 15%; right: 8%;
+      width: 1px; height: 60%;
+      background: linear-gradient(180deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+      opacity: 0.15;
     }
-    .service-card:hover { background: rgba(43,29,20,.6); }
-    .service-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0;
-      height: 2px; width: 0; background: var(--gold);
-      transition: width .4s ease;
-    }
-    .service-card:hover::after { width: 100%; }
-
-    .service-num {
-      font-family: var(--serif); font-size: 4rem;
-      font-weight: 300; color: rgba(201,168,76,.12);
-      line-height: 1; margin-bottom: 1.2rem;
-      transition: color .3s;
-    }
-    .service-card:hover .service-num { color: rgba(201,168,76,.22); }
-
-    .service-name {
-      font-family: var(--serif); font-size: 1.55rem;
-      font-weight: 300; color: var(--white); margin-bottom: 1.4rem;
-      letter-spacing: .02em;
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      top: 20%; right: 14%;
+      width: 1px; height: 50%;
+      background: linear-gradient(180deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+      opacity: 0.08;
     }
 
-    .service-list {
-      list-style: none; display: flex; flex-direction: column; gap: .55rem;
+    /* Floating gold orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      animation: orbFloat 8s ease-in-out infinite;
     }
-    .service-list li {
-      font-family: var(--sans); font-size: .82rem;
-      font-weight: 300; letter-spacing: .06em;
-      color: var(--grey);
-      padding-left: 1.1rem; position: relative;
+    .orb-1 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      top: -100px; right: 5%;
     }
-    .service-list li::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 4px; height: 1px; background: var(--gold-dim);
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(92,61,34,0.3) 0%, transparent 70%);
+      bottom: 10%; left: 10%;
+      animation-delay: -4s;
     }
 
-    /* ── GALLERY ───────────────────────────────────────── */
-    #gallery {
-      background: var(--black);
-      padding: 7rem 4rem;
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
     }
-    .gallery-header {
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
       text-align: center;
+      padding: 2rem 1.5rem;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.2s forwards;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 50px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .hero-eyebrow::after { transform: scaleX(-1); }
+
+    .hero-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+
+    .hero-desc {
+      margin: 2rem auto;
+      max-width: 550px;
+      font-size: 1.05rem;
+      color: rgba(232,221,208,0.7);
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 1s 0.8s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s 1.1s forwards;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.4s forwards;
+    }
+    .hero-badge-item {
+      text-align: center;
+    }
+    .hero-badge-item strong {
+      display: block;
+      font-family: var(--ff-serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .hero-badge-item span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hero-badge-sep {
+      width: 1px; height: 40px;
+      background: linear-gradient(180deg, transparent, var(--gold), transparent);
+      opacity: 0.3;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      right: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.8s forwards;
+    }
+    .scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      writing-mode: vertical-rl;
+    }
+    .scroll-hint-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+    @keyframes fadeIn { to { opacity: 0.6; } }
+
+    /* =============================================
+       SECTION BASE
+    ============================================= */
+    section { padding: 7rem 5%; }
+
+    .section-header {
       margin-bottom: 4rem;
     }
-    .gallery-header .thin-rule { margin: 0 auto 2rem; }
+    .section-header.center {
+      text-align: center;
+    }
+    .section-header.center .section-subtitle {
+      margin: 0.8rem auto 0;
+    }
 
-    .gallery-grid {
+    /* =============================================
+       ABOUT
+    ============================================= */
+    #about {
+      background: linear-gradient(170deg, var(--black-soft) 0%, #130e09 50%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: auto auto;
-      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    /* First photo spans 2 cols, 2 rows — hero gallery image */
-    .gallery-item {
+    .about-visual {
+      position: relative;
+    }
+    .about-frame {
+      position: relative;
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2.5rem;
+    }
+    .about-frame::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: -12px;
+      right: 12px; bottom: 12px;
+      border: 1px solid rgba(201,168,76,0.08);
+      pointer-events: none;
+    }
+    .about-frame-inner {
+      background: linear-gradient(145deg, #1e1208, #150e06);
+      aspect-ratio: 3/4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
       position: relative;
       overflow: hidden;
-      background: var(--brown);
     }
-    .gallery-item:first-child {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .6s ease, filter .4s ease;
-      filter: brightness(.88) saturate(.9);
-      min-height: 220px;
-    }
-    .gallery-item:first-child img { min-height: 460px; }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
-      filter: brightness(.75) saturate(1.1);
-    }
-
-    /* gold overlay label */
-    .gallery-label {
+    .about-frame-inner::after {
+      content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 1.4rem 1.6rem .9rem;
-      background: linear-gradient(to top, rgba(13,11,11,.85) 0%, transparent 100%);
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-style: italic;
-      font-weight: 300;
+      height: 40%;
+      background: linear-gradient(0deg, rgba(201,168,76,0.06) 0%, transparent 100%);
+    }
+
+    /* Decorative scissors / salon icon */
+    .about-icon {
+      font-size: 4rem;
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .about-name-badge {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(201,168,76,0.04);
+    }
+    .about-name-badge h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.4rem;
+      font-weight: 400;
       color: var(--gold-light);
-      letter-spacing: .04em;
-      transform: translateY(4px);
-      opacity: 0;
-      transition: opacity .35s ease, transform .35s ease;
+      font-style: italic;
     }
-    .gallery-item:hover .gallery-label {
-      opacity: 1;
-      transform: translateY(0);
+    .about-name-badge p {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
     }
 
-    /* thin gold border on hover */
-    .gallery-item::after {
+    /* Corner decorations */
+    .corner {
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .corner-tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+    .corner-tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+    .corner-bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+    .corner-br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+    .about-content {}
+    .about-content .section-label { margin-bottom: 0.5rem; }
+
+    .about-text {
+      color: rgba(232,221,208,0.75);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin: 1.5rem 0;
+    }
+    .about-text p + p { margin-top: 1.2rem; }
+
+    .about-highlight {
+      font-family: var(--ff-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold-light);
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      line-height: 1.5;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat-box {
+      padding: 1.2rem;
+      border: 1px solid rgba(201,168,76,0.15);
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .stat-box:hover {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.04);
+    }
+    .stat-box strong {
+      display: block;
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-box span {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.4rem;
+    }
+
+    /* =============================================
+       SERVICES
+    ============================================= */
+    #services {
+      background: var(--black);
+      position: relative;
+    }
+
+    #services::before {
       content: '';
-      position: absolute; inset: 0;
-      border: 1px solid transparent;
-      transition: border-color .35s;
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+      opacity: 0.15;
+    }
+
+    .services-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-category {
+      margin-bottom: 4rem;
+    }
+
+    .service-category-title {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .service-category-title h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .service-category-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, #130d08, #0f0a06);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,76,0.08);
+    }
+
+    .service-card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      display: block;
+      opacity: 0.7;
+    }
+    .service-card h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--beige);
+      margin-bottom: 0.5rem;
+    }
+    .service-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .service-card .card-glow {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover .card-glow { opacity: 0.6; }
+
+    .services-cta {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    /* =============================================
+       GALLERY
+    ============================================= */
+    #gallery {
+      background: linear-gradient(160deg, #0d0904, var(--black) 40%, #100b06 100%);
+      position: relative;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 200px;
+      gap: 0.8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      background: var(--brown-dark);
+      border: 1px solid rgba(201,168,76,0.08);
+    }
+
+    .gallery-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
+    .gallery-item:nth-child(2) { grid-column: span 4; grid-row: span 1; }
+    .gallery-item:nth-child(3) { grid-column: span 3; grid-row: span 1; }
+    .gallery-item:nth-child(4) { grid-column: span 3; grid-row: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 4; grid-row: span 1; }
+    .gallery-item:nth-child(6) { grid-column: span 5; grid-row: span 1; }
+    .gallery-item:nth-child(7) { grid-column: span 4; grid-row: span 1; }
+
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      background: linear-gradient(145deg, #1a1008, #0f0906);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .gallery-item:hover .gallery-placeholder {
+      transform: scale(1.05);
+    }
+
+    .gallery-placeholder-icon {
+      font-size: 2rem;
+      opacity: 0.2;
+    }
+    .gallery-placeholder-text {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10,8,6,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+    .gallery-overlay span {
+      font-family: var(--ff-serif);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    /* Gallery gradient overlays to add visual interest */
+    .gallery-item:nth-child(odd) .gallery-placeholder {
+      background: linear-gradient(145deg, #1e1209, #120b06);
+    }
+    .gallery-item:nth-child(3) .gallery-placeholder {
+      background: linear-gradient(145deg, #1a0e10, #0f0808);
+    }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    #testimonials {
+      background: var(--black-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    #testimonials::before {
+      content: '"';
+      font-family: var(--ff-serif);
+      font-size: 25rem;
+      color: var(--gold);
+      opacity: 0.025;
+      position: absolute;
+      top: -5rem;
+      left: 2rem;
+      line-height: 1;
       pointer-events: none;
-      z-index: 2;
-    }
-    .gallery-item:hover::after {
-      border-color: rgba(201,168,76,.45);
+      user-select: none;
     }
 
-    @media (max-width: 900px) {
-      #gallery { padding: 5rem 2rem; }
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .gallery-item:first-child {
-        grid-column: span 2;
-        grid-row: span 1;
-      }
-      .gallery-item:first-child img { min-height: 280px; }
-      .gallery-label { opacity: 1; transform: translateY(0); }
+    .testimonials-slider {
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
     }
 
-    @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .testimonial-track {
+      overflow: hidden;
     }
 
-    /* ── CONTACT ───────────────────────────────────────── */
+    .testimonial-slides {
+      display: flex;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .testimonial-slide {
+      min-width: 100%;
+      padding: 0 1rem;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(145deg, #16100a, #110d08);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem;
+      position: relative;
+      text-align: center;
+    }
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-text {
+      font-family: var(--ff-serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--beige);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .testimonial-author strong {
+      font-family: var(--ff-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 400;
+    }
+    .testimonial-author span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Slider controls */
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .slider-btn {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(201,168,76,0.3);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.1rem;
+    }
+    .slider-btn:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--gold);
+      box-shadow: var(--glow);
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 0.7rem;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.25);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
     #contact {
       background: var(--black);
+      position: relative;
+    }
+
+    .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
       align-items: start;
     }
 
-    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .contact-info {}
+    .contact-detail {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+      align-items: flex-start;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .contact-detail-body strong {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .contact-detail-body span, .contact-detail-body a {
+      font-size: 0.95rem;
+      color: var(--beige);
+      opacity: 0.85;
+      transition: color 0.3s;
+    }
+    .contact-detail-body a:hover { color: var(--gold-light); opacity: 1; }
 
-    .contact-item {
-      display: flex; flex-direction: column; gap: .4rem;
-    }
-    .contact-item-label {
-      font-family: var(--sans); font-size: .62rem;
-      font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--gold-dim);
-    }
-    .contact-item-value {
-      font-family: var(--serif); font-size: 1.15rem;
-      font-weight: 300; color: var(--white); line-height: 1.5;
-    }
-    .contact-item-value a { color: var(--white); text-decoration: none; transition: color .2s; }
-    .contact-item-value a:hover { color: var(--gold); }
-
-    .hours-grid {
-      display: flex; flex-direction: column; gap: .3rem; margin-top: .3rem;
-    }
-    .hours-row {
-      display: flex; justify-content: space-between;
-      font-family: var(--sans); font-size: .82rem;
-      color: var(--grey); padding-bottom: .3rem;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-    .hours-row span:last-child { color: var(--gold); }
-
-    .contact-cta {
-      background: var(--brown);
-      padding: 3.5rem;
+    .map-placeholder {
+      margin-top: 2rem;
+      border: 1px solid rgba(201,168,76,0.15);
+      height: 200px;
+      background: linear-gradient(145deg, #130d08, #0f0a06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       position: relative;
-      border-top: 2px solid var(--gold);
     }
-    .contact-cta p {
-      font-family: var(--sans); font-size: .9rem;
-      line-height: 1.8; color: var(--grey); margin-bottom: 2rem;
+    .map-placeholder::before {
+      content: '📍';
+      font-size: 2rem;
+      opacity: 0.4;
     }
-    .wa-btn {
-      display: inline-flex; align-items: center; gap: .8rem;
-      padding: 1rem 2.2rem;
-      background: #25D366; color: var(--white);
-      font-family: var(--sans); font-size: .72rem;
-      font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
-      text-decoration: none;
-      transition: background .25s, transform .2s;
+    .map-placeholder a {
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: opacity 0.3s;
     }
-    .wa-btn:hover { background: #1ebe58; transform: translateY(-2px); }
-    .wa-btn svg { width: 18px; height: 18px; fill: var(--white); flex-shrink: 0; }
+    .map-placeholder a:hover { opacity: 0.7; }
 
-    .insta-link {
-      display: inline-flex; align-items: center; gap: .6rem;
-      margin-top: 1.5rem;
-      font-family: var(--sans); font-size: .72rem;
-      letter-spacing: .18em; text-transform: uppercase;
-      color: var(--gold); text-decoration: none;
-      transition: color .2s;
+    /* Contact form */
+    .contact-form { }
+    .form-group {
+      margin-bottom: 1.4rem;
     }
-    .insta-link:hover { color: var(--gold-light); }
-    .insta-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+    .form-group label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: rgba(201,168,76,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--beige);
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 0.9rem 1.2rem;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: rgba(201,168,76,0.45);
+      background: rgba(201,168,76,0.05);
+    }
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    .form-group select option {
+      background: var(--black-soft);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(154,136,120,0.5);
+    }
 
-    /* ── FOOTER ────────────────────────────────────────── */
+    .form-submit { width: 100%; justify-content: center; margin-top: 0.5rem; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
     footer {
-      background: #080606;
-      padding: 3rem 4rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1.5rem;
-      border-top: 1px solid rgba(201,168,76,.12);
+      background: linear-gradient(160deg, #090604, #0d0906);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 4rem 5% 2rem;
     }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer-brand {}
     .footer-logo {
-      font-family: var(--serif); font-size: 1.2rem;
-      font-weight: 300; letter-spacing: .2em;
-      color: var(--gold); text-transform: uppercase;
+      font-family: var(--ff-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.03em;
     }
-    .footer-copy {
-      font-family: var(--sans); font-size: .65rem;
-      letter-spacing: .12em; color: rgba(197,191,186,.35);
+    .footer-logo span {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 2px;
+      font-weight: 300;
+      font-family: var(--ff-body);
     }
-    .footer-line {
-      display: flex; align-items: center; gap: .8rem;
+    .footer-brand p {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 280px;
     }
-    .footer-line span { font-size: .6rem; color: rgba(201,168,76,.3); }
 
-    /* ── ANIMATIONS ────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .footer-social {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
     }
-    @keyframes bounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(6px); }
+    .social-link {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--gold);
+      transition: var(--transition);
+    }
+    .social-link:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--gold);
+      transform: translateY(-2px);
     }
 
+    .footer-col h4 {
+      font-family: var(--ff-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .footer-col ul li {
+      margin-bottom: 0.7rem;
+    }
+    .footer-col ul li a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--beige); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201,168,76,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: rgba(154,136,120,0.5);
+    }
+    .footer-bottom a {
+      color: var(--gold);
+      opacity: 0.7;
+      font-size: 0.75rem;
+      transition: opacity 0.3s;
+    }
+    .footer-bottom a:hover { opacity: 1; }
+
+    /* =============================================
+       FLOATING WHATSAPP BUTTON
+    ============================================= */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.8rem;
+    }
+
+    .whatsapp-tooltip {
+      background: var(--black-soft);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--beige);
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .whatsapp-float:hover .whatsapp-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .whatsapp-btn {
+      width: 58px; height: 58px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 25px rgba(37,211,102,0.35);
+      animation: waPulse 2.5s ease-in-out infinite;
+      transition: transform 0.3s;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); animation: none; }
+    .whatsapp-btn svg { width: 28px; height: 28px; fill: white; }
+
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 6px 25px rgba(37,211,102,0.35); }
+      50% { box-shadow: 0 6px 40px rgba(37,211,102,0.6), 0 0 0 12px rgba(37,211,102,0.08); }
+    }
+
+    /* =============================================
+       SCROLL ANIMATIONS
+    ============================================= */
     .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s ease, transform .7s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .reveal.visible { opacity: 1; transform: none; }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ── RESPONSIVE ────────────────────────────────────── */
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; }
-      nav.scrolled { padding: .9rem 2rem; }
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { max-width: 400px; margin: 0 auto; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 5rem 5%; }
+
       .nav-links { display: none; }
       .hamburger { display: flex; }
 
-      section { padding: 5rem 2rem; }
+      .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .hero-badge { display: none; }
 
-      #about {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 160px;
       }
-      .about-visual { max-height: 320px; }
+      .gallery-item { grid-column: span 1 !important; grid-row: span 1 !important; }
 
-      .services-grid { grid-template-columns: 1fr; }
-      .service-card { padding: 2.2rem 1.8rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
 
-      #contact {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .testimonial-card { padding: 2rem 1.5rem; }
+      .testimonial-text { font-size: 1.1rem; }
 
-      footer {
-        padding: 2rem;
-        flex-direction: column; align-items: flex-start;
-        gap: .8rem;
-      }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+
+      .scroll-hint { display: none; }
     }
 
-    @media (max-width: 580px) {
-      .hero-title { font-size: 3.2rem; }
-      .about-badges { gap: .6rem; }
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 280px; justify-content: center; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item { grid-column: span 1 !important; grid-row: span 1 !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── NAV ──────────────────────────────────────────── -->
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
   <nav id="navbar">
-    <a href="#hero" class="nav-logo">Newlook Salon</a>
+    <a href="#hero" class="nav-logo" aria-label="New Look Salon Home">
+      <span class="nav-logo-main">New Look</span>
+      <span class="nav-logo-sub">Salon &amp; Beauty</span>
+    </a>
+
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li>
+        <a
+          href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+          target="_blank" rel="noopener" class="nav-cta">
+          Book Now
+        </a>
+      </li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
       <span></span><span></span><span></span>
-    </button>
+    </div>
   </nav>
 
-  <!-- mobile overlay -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#services" onclick="closeMenu()">Services</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#gallery" class="mobile-link">Gallery</a>
+    <a href="#testimonials" class="mobile-link">Reviews</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a
+      href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+      target="_blank" rel="noopener" style="color: var(--gold-light)">
+      Book Appointment
+    </a>
   </div>
 
-  <!-- ── HERO ─────────────────────────────────────────── -->
-  <section id="hero">
-    <div class="hero-inner">
-      <p class="hero-eyebrow">Est. Karachi &nbsp;·&nbsp; Beauty &amp; Elegance</p>
-      <h1 class="hero-title">New<em>look</em><br>Salon</h1>
-      <p class="hero-sub">Where Beauty Meets Expertise</p>
-      <div class="divider-gold">
-        <span></span><i>✦</i><span></span>
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-lines"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Karachi's Premier Beauty Studio</p>
+
+      <h1 class="hero-title">
+        Where Artistry<br>
+        <em>Meets Elegance</em>
+      </h1>
+
+      <p class="hero-desc">
+        Crafted for the discerning woman — a sanctuary of beauty guided by
+        over 18 years of mastery, passion, and personalised care.
+      </p>
+
+      <div class="hero-actions">
+        <a
+          href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+          target="_blank" rel="noopener"
+          class="btn btn-gold">
+          <!-- WhatsApp icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/></svg>
+          Book Appointment
+        </a>
+        <a href="#services" class="btn btn-outline">Explore Services</a>
       </div>
-      <a href="#contact" class="btn-gold">Book an Appointment</a>
     </div>
-    <div class="scroll-hint">
+
+    <div class="hero-badge">
+      <div class="hero-badge-item">
+        <strong>18+</strong>
+        <span>Years of Expertise</span>
+      </div>
+      <div class="hero-badge-sep"></div>
+      <div class="hero-badge-item">
+        <strong>5★</strong>
+        <span>Client Satisfaction</span>
+      </div>
+      <div class="hero-badge-sep"></div>
+      <div class="hero-badge-item">
+        <strong>All</strong>
+        <span>Services Under One Roof</span>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-hint-line"></div>
       <span>Scroll</span>
-      <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </section>
 
-  <!-- ── ABOUT ─────────────────────────────────────────── -->
-  <section id="about">
-    <div class="about-visual reveal">
-      <div class="about-frame">
-        <div class="about-frame-inner">
-          <div class="salon-icon">✦</div>
-          <p class="about-quote">"We don't just enhance your look — we elevate your confidence."</p>
-        </div>
-      </div>
-    </div>
-    <div class="about-text reveal">
-      <p class="section-label">Our Story</p>
-      <h2 class="section-title">Beauty Meets <em>Expertise</em></h2>
-      <div class="thin-rule"></div>
-      <p>
-        At <strong>Newlook Salon</strong>, we offer a complete range of services designed to help you look and feel your best in a modern, welcoming space.
-      </p>
-      <p>
-        Our team of skilled professionals brings artistry and precision to every service — from transformative hair treatments to radiant skin care and flawless bridal looks.
-      </p>
-      <p>
-        We believe beauty is a form of confidence. Every visit is crafted to leave you feeling refreshed, radiant, and truly yourself.
-      </p>
-      <div class="about-badges">
-        <div class="badge">Hair</div>
-        <div class="badge">Skin &amp; Spa</div>
-        <div class="badge">Makeup</div>
-        <div class="badge">Bridal</div>
-        <div class="badge">Styling</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── SERVICES ──────────────────────────────────────── -->
-  <section id="services">
-    <div class="services-header reveal">
-      <p class="section-label">What We Offer</p>
-      <h2 class="section-title">Our <em>Services</em></h2>
-      <div class="thin-rule"></div>
-    </div>
-
-    <div class="services-grid">
-
-      <!-- Spa & Skin -->
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <h3 class="service-name">Spa &amp; Skin</h3>
-        <ul class="service-list">
-          <li>Facials</li>
-          <li>Spa Treatments</li>
-          <li>Manicures</li>
-          <li>Pedicures</li>
-        </ul>
-      </div>
-
-      <!-- Hair -->
-      <div class="service-card reveal">
-        <div class="service-num">02</div>
-        <h3 class="service-name">Hair</h3>
-        <ul class="service-list">
-          <li>Advanced Treatments</li>
-          <li>Hair Transformations</li>
-          <li>Keratin Treatments</li>
-          <li>Nanoplastia &amp; Hair Botox</li>
-          <li>Precision Coloring</li>
-          <li>Balayage &amp; Streaking</li>
-        </ul>
-      </div>
-
-      <!-- Makeup & Styling -->
-      <div class="service-card reveal">
-        <div class="service-num">03</div>
-        <h3 class="service-name">Makeup &amp; Styling</h3>
-        <ul class="service-list">
-          <li>Bridal Makeup</li>
-          <li>Reception Makeup</li>
-          <li>Party Glam</li>
-          <li>Soft &amp; Natural Makeup</li>
-          <li>Model Makeup</li>
-          <li>Professional Hairstyling</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── GALLERY ───────────────────────────────────────── -->
-  <section id="gallery">
-    <div class="gallery-header reveal">
-      <p class="section-label">Inside the Salon</p>
-      <h2 class="section-title">The <em>Experience</em></h2>
-      <div class="thin-rule"></div>
-    </div>
-
-    <div class="gallery-grid">
-
-      <!-- Large feature: Facial / Spa -->
-      <div class="gallery-item reveal">
-        <img
-          src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80&fit=crop"
-          alt="Woman receiving a relaxing facial treatment at Newlook Salon"
-          loading="lazy"
-        />
-        <div class="gallery-label">Facial &amp; Skin Treatment</div>
-      </div>
-
-      <!-- Manicure -->
-      <div class="gallery-item reveal">
-        <img
-          src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop"
-          alt="Manicure nail care at Newlook Salon"
-          loading="lazy"
-        />
-        <div class="gallery-label">Manicure</div>
-      </div>
-
-      <!-- Pedicure -->
-      <div class="gallery-item reveal">
-        <img
-          src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&q=80&fit=crop"
-          alt="Pedicure foot care treatment at Newlook Salon"
-          loading="lazy"
-        />
-        <div class="gallery-label">Pedicure</div>
-      </div>
-
-      <!-- Hair Treatment -->
-      <div class="gallery-item reveal">
-        <img
-          src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&fit=crop"
-          alt="Professional hair treatment at Newlook Salon"
-          loading="lazy"
-        />
-        <div class="gallery-label">Hair Treatment</div>
-      </div>
-
-      <!-- Makeup -->
-      <div class="gallery-item reveal">
-        <img
-          src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80&fit=crop"
-          alt="Professional makeup application at Newlook Salon"
-          loading="lazy"
-        />
-        <div class="gallery-label">Makeup &amp; Styling</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── CONTACT ────────────────────────────────────────── -->
-  <section id="contact">
-    <div class="contact-info reveal">
-      <p class="section-label">Reach Us</p>
-      <h2 class="section-title">Visit <em>Us</em></h2>
-      <div class="thin-rule"></div>
-
-      <div class="contact-item">
-        <span class="contact-item-label">Location</span>
-        <span class="contact-item-value">
-          392-A, Rafah-e-Aam Society<br>
-          Malir Halt, Karachi
-        </span>
-      </div>
-
-      <div class="contact-item">
-        <span class="contact-item-label">Phone</span>
-        <span class="contact-item-value">
-          <a href="tel:+923022604409">0302 260 4409</a>
-        </span>
-      </div>
-
-      <div class="contact-item">
-        <span class="contact-item-label">Opening Hours</span>
-        <div class="hours-grid">
-          <div class="hours-row">
-            <span>Monday – Sunday</span>
-            <span>11:00 am – 9:00 pm</span>
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about" aria-label="About New Look Salon">
+    <div class="about-grid">
+      <!-- Visual panel -->
+      <div class="about-visual reveal">
+        <div class="about-frame">
+          <div class="about-frame-inner">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+            <div class="about-icon">✦</div>
+            <div class="about-name-badge">
+              <h3>Quratulain Imran</h3>
+              <p>Founder &amp; Master Stylist</p>
+            </div>
+            <div style="text-align:center; padding: 0 1.5rem;">
+              <div class="gold-divider"><span>✦</span></div>
+              <p style="font-size:0.75rem; color:var(--text-muted); letter-spacing:0.1em;">New Look Salon, Karachi</p>
+              <p style="font-size:0.68rem; color:rgba(154,136,120,0.5); margin-top:0.3rem; letter-spacing:0.05em;">Est. with 18+ years of beauty mastery</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="contact-item">
-        <span class="contact-item-label">Follow Us</span>
-        <a href="https://www.instagram.com/newlook_beauty_salon" target="_blank" rel="noopener" class="insta-link">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-          @newlook_beauty_salon
+      <!-- Content panel -->
+      <div class="about-content reveal reveal-delay-2">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">Beauty Refined Through <em>Experience</em></h2>
+
+        <div class="gold-divider"><span>✦</span></div>
+
+        <div class="about-text">
+          <p>At New Look Salon, beauty is an art form — one we have refined through
+          experience, care, and an unwavering attention to detail. Led by
+          <strong style="color:var(--gold-light);font-weight:400;">Quratulain Imran</strong>,
+          with over 18 years of deep expertise in the beauty industry, our salon
+          is built on trust, skill, and a genuine understanding of what truly
+          suits you.</p>
+
+          <p>Every client walks into a warm, modern space and receives treatment
+          that is thoughtfully tailored — never rushed, never generic. From
+          nourishing facials and spa therapies to precision hair transformations,
+          we bring everything under one roof.</p>
+
+          <p>Our specialties span keratin, nanoplastia, hair botox, balayage, and
+          bespoke coloring — each performed with the confidence that only
+          two decades of practice can offer. Whether you seek an understated
+          everyday look or a full bridal transformation, we ensure a flawless
+          finish every single time.</p>
+        </div>
+
+        <blockquote class="about-highlight">
+          "We don't just enhance your look —<br>we elevate your confidence."
+        </blockquote>
+
+        <div class="about-stats">
+          <div class="stat-box">
+            <strong>18+</strong>
+            <span>Years Experience</span>
+          </div>
+          <div class="stat-box">
+            <strong>50+</strong>
+            <span>Beauty Services</span>
+          </div>
+          <div class="stat-box">
+            <strong>7</strong>
+            <span>Days a Week</span>
+          </div>
+        </div>
+
+        <div style="margin-top:2.5rem;">
+          <a
+            href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+            target="_blank" rel="noopener"
+            class="btn btn-gold">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section id="services" aria-label="Our Services">
+    <div class="services-wrapper">
+      <div class="section-header center reveal">
+        <span class="section-label">What We Offer</span>
+        <h2 class="section-title">Curated <em>Services</em></h2>
+        <p class="section-subtitle">A complete beauty experience — from everyday indulgences to extraordinary transformations.</p>
+      </div>
+
+      <!-- Skin & Care -->
+      <div class="service-category reveal">
+        <div class="service-category-title">
+          <h3>✦ Skin &amp; Care</h3>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-card-icon">🌿</span>
+            <h4>Luxury Facials</h4>
+            <p>Tailored facial treatments that deeply cleanse, hydrate, and restore your skin's natural luminosity.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🛁</span>
+            <h4>Spa Treatments</h4>
+            <p>Indulgent body spa rituals designed to melt away stress and revive your senses completely.</p>
+            <div class="card-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hands & Feet -->
+      <div class="service-category reveal reveal-delay-1">
+        <div class="service-category-title">
+          <h3>✦ Hands &amp; Feet</h3>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-card-icon">💅</span>
+            <h4>Manicures</h4>
+            <p>From classic polish to gel extensions — impeccable nail care crafted with precision and style.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🦶</span>
+            <h4>Pedicures</h4>
+            <p>Relaxing, restorative foot treatments that leave your feet soft, clean, and beautifully finished.</p>
+            <div class="card-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hair -->
+      <div class="service-category reveal reveal-delay-2">
+        <div class="service-category-title">
+          <h3>✦ Hair</h3>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-card-icon">💆</span>
+            <h4>Keratin Treatment</h4>
+            <p>Smooth, frizz-free results that last for months — restoring shine and manageability to every strand.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">✨</span>
+            <h4>Nanoplastia</h4>
+            <p>An advanced protein-infused smoothing treatment that nourishes while perfectly reconstructing the hair fibre.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">💉</span>
+            <h4>Hair Botox</h4>
+            <p>Deep conditioning and revitalising therapy that fills hair porosity and delivers glass-like brilliance.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🎨</span>
+            <h4>Precision Coloring</h4>
+            <p>Expert colour application from rich all-overs to bespoke multi-tonal techniques, precisely crafted.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🌅</span>
+            <h4>Balayage &amp; Streaking</h4>
+            <p>Hand-painted sun-kissed dimension and bold streaks that are natural in appearance, striking in effect.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🔬</span>
+            <h4>Hair Treatments</h4>
+            <p>Restorative and strengthening treatments tailored to your specific hair type, texture, and concern.</p>
+            <div class="card-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Makeup & Styling -->
+      <div class="service-category reveal reveal-delay-3">
+        <div class="service-category-title">
+          <h3>✦ Makeup &amp; Styling</h3>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-card-icon">🪞</span>
+            <h4>Soft Everyday Makeup</h4>
+            <p>Effortlessly refined looks for daily wear — polished, fresh, and perfectly balanced.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🎉</span>
+            <h4>Party Glam</h4>
+            <p>Bold, luminous, and camera-ready — designed to turn every head in the room.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">📸</span>
+            <h4>Model Makeup</h4>
+            <p>Editorial and high-fashion looks executed with professional-grade artistry and product.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">💍</span>
+            <h4>Bridal Makeup</h4>
+            <p>Your most important day deserves perfection — flawless, enduring, and uniquely yours.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">🌹</span>
+            <h4>Reception Makeup</h4>
+            <p>Elegant, photogenic looks that transition seamlessly from ceremony to celebration.</p>
+            <div class="card-glow"></div>
+          </div>
+          <div class="service-card">
+            <span class="service-card-icon">👑</span>
+            <h4>Hairstyles</h4>
+            <p>From intricate bridal updos to relaxed waves — hairstyling that complements and elevates.</p>
+            <div class="card-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="services-cta reveal">
+        <p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:0.9rem;">Ready to experience the difference?</p>
+        <a
+          href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+          target="_blank" rel="noopener"
+          class="btn btn-gold">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/></svg>
+          Book Your Service
         </a>
       </div>
     </div>
+  </section>
 
-    <div class="contact-cta reveal">
-      <p class="section-label">Book Now</p>
-      <h3 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);">Ready for a <em>New Look?</em></h3>
-      <p>
-        Our team is ready to welcome you. Reach out via WhatsApp to schedule your appointment — we respond quickly and look forward to seeing you.
-      </p>
-      <a
-        href="https://wa.me/923022604409?text=Hello!%20I'd%20like%20to%20book%20an%20appointment%20at%20Newlook%20Salon."
-        target="_blank" rel="noopener"
-        class="wa-btn"
-      >
-        <!-- WhatsApp SVG -->
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.117 1.535 5.845L0 24l6.335-1.511A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.013-1.376l-.36-.214-3.732.89.935-3.628-.234-.372A9.818 9.818 0 012.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z"/>
-        </svg>
-        Book via WhatsApp
-      </a>
-      <br>
-      <a
-        href="https://www.instagram.com/newlook_beauty_salon"
-        target="_blank" rel="noopener"
-        class="insta-link"
-        style="margin-top:1.2rem"
-      >
-        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-        Follow on Instagram
+  <!-- ============================================================
+       GALLERY
+  ============================================================ -->
+  <section id="gallery" aria-label="Gallery">
+    <div class="section-header center reveal">
+      <span class="section-label">Our Work</span>
+      <h2 class="section-title">A Portfolio of <em>Transformations</em></h2>
+      <p class="section-subtitle">Every look we create is a reflection of individuality — beautifully refined.</p>
+    </div>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Bridal Looks</span>
+        </div>
+        <div class="gallery-overlay"><span>Bridal Artistry</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Hair Color</span>
+        </div>
+        <div class="gallery-overlay"><span>Balayage &amp; Color</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Skincare</span>
+        </div>
+        <div class="gallery-overlay"><span>Glow Facials</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Party Glam</span>
+        </div>
+        <div class="gallery-overlay"><span>Party Glam</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Keratin</span>
+        </div>
+        <div class="gallery-overlay"><span>Keratin Smoothing</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Nail Art</span>
+        </div>
+        <div class="gallery-overlay"><span>Nail Artistry</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">✦</span>
+          <span class="gallery-placeholder-text">Hairstyles</span>
+        </div>
+        <div class="gallery-overlay"><span>Elegant Hairstyles</span></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <a href="https://www.instagram.com/newlook_beauty_saloon" target="_blank" rel="noopener" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        View More on Instagram
       </a>
     </div>
   </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────── -->
-  <footer>
-    <div class="footer-line">
-      <span class="footer-logo">Newlook Salon</span>
-      <span>✦</span>
-      <span style="font-family:var(--sans);font-size:.65rem;color:rgba(197,191,186,.4);letter-spacing:.08em;">Karachi</span>
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section id="testimonials" aria-label="Client Testimonials">
+    <div class="section-header center reveal">
+      <span class="section-label">Client Stories</span>
+      <h2 class="section-title">Words That <em>Inspire Us</em></h2>
     </div>
-    <p class="footer-copy">© 2025 Newlook Salon. All rights reserved.</p>
+
+    <div class="testimonials-slider reveal">
+      <div class="testimonial-track">
+        <div class="testimonial-slides" id="testimonialSlides">
+
+          <!-- Slide 1 -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "I came in for my bridal makeup and left feeling like an absolute queen.
+                Quratulain Apa has this rare gift — she doesn't just make you look beautiful,
+                she makes you feel it. My photos were stunning, and my skin glowed all day.
+                I would recommend New Look to every bride in Karachi without a second thought."
+              </p>
+              <div class="testimonial-author">
+                <strong>Sana Fatima</strong>
+                <span>Bridal Client, Defence, Karachi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "I've been getting keratin treatments done here for the past two years and
+                I genuinely cannot imagine going anywhere else. The results are always
+                smooth, natural, and long-lasting. The salon has such a calm, sophisticated
+                atmosphere — it's a pleasure every single visit."
+              </p>
+              <div class="testimonial-author">
+                <strong>Mehwish Tariq</strong>
+                <span>Regular Client, Gulshan-e-Iqbal, Karachi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "The balayage Quratulain Apa did on my hair exceeded everything I had
+                imagined. She truly understood the look I wanted and made it even better.
+                The colour blended so naturally — everyone keeps asking where I get my
+                hair done. New Look Salon is genuinely on another level."
+              </p>
+              <div class="testimonial-author">
+                <strong>Hira Noor</strong>
+                <span>Hair Color Client, Malir, Karachi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "I visited for a facial and spa treatment and it was absolutely transformative.
+                The care and attention I received was unlike anything I have experienced at
+                other salons. My skin has never looked this fresh. The ambiance, the professionalism,
+                the results — everything is first class. I am already booked for next month."
+              </p>
+              <div class="testimonial-author">
+                <strong>Zara Khalid</strong>
+                <span>Spa Client, North Karachi</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-btn" id="prevBtn" aria-label="Previous">&#8592;</button>
+        <div class="slider-dots" id="sliderDots"></div>
+        <button class="slider-btn" id="nextBtn" aria-label="Next">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact" aria-label="Contact Us">
+    <div class="contact-grid">
+      <!-- Info side -->
+      <div>
+        <div class="section-header reveal">
+          <span class="section-label">Find Us</span>
+          <h2 class="section-title">Visit the <em>Studio</em></h2>
+          <p class="section-subtitle">We'd love to welcome you. Walk in or book ahead — your beauty journey awaits.</p>
+        </div>
+
+        <div class="contact-detail reveal">
+          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-body">
+            <strong>Address</strong>
+            <span>392 A Rafha e Aam Society, Malir Halt, Karachi</span>
+          </div>
+        </div>
+
+        <div class="contact-detail reveal reveal-delay-1">
+          <div class="contact-detail-icon">📞</div>
+          <div class="contact-detail-body">
+            <strong>WhatsApp / Call</strong>
+            <a href="tel:+923022604409">0302 2604409</a>
+          </div>
+        </div>
+
+        <div class="contact-detail reveal reveal-delay-2">
+          <div class="contact-detail-icon">📸</div>
+          <div class="contact-detail-body">
+            <strong>Instagram</strong>
+            <a href="https://www.instagram.com/newlook_beauty_saloon" target="_blank" rel="noopener">@newlook_beauty_saloon</a>
+          </div>
+        </div>
+
+        <div class="contact-detail reveal reveal-delay-3">
+          <div class="contact-detail-icon">🕐</div>
+          <div class="contact-detail-body">
+            <strong>Opening Hours</strong>
+            <span>Monday – Sunday &nbsp;|&nbsp; 11:00 AM – 9:00 PM</span>
+          </div>
+        </div>
+
+        <div class="map-placeholder reveal">
+          <span>392 A Rafha e Aam Society, Malir Halt, Karachi</span>
+          <a href="https://www.google.com/maps/search/392+A+Rafha+e+Aam+Society+Malir+Halt+Karachi" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+        </div>
+
+        <div style="margin-top:2rem;" class="reveal">
+          <a
+            href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+            target="_blank" rel="noopener"
+            class="btn btn-gold">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/></svg>
+            Message Us on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Form side -->
+      <div class="reveal reveal-delay-2">
+        <div class="section-header">
+          <span class="section-label">Get in Touch</span>
+          <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">Send Us a <em>Message</em></h2>
+        </div>
+
+        <div id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="e.g. Ayesha Khan" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone / WhatsApp</label>
+            <input type="tel" id="phone" placeholder="03xx xxxxxxx" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label for="service">Service of Interest</label>
+            <select id="service">
+              <option value="" disabled selected>Select a service…</option>
+              <option>Bridal Makeup</option>
+              <option>Party Makeup</option>
+              <option>Keratin Treatment</option>
+              <option>Nanoplastia</option>
+              <option>Hair Botox</option>
+              <option>Balayage / Streaking</option>
+              <option>Hair Coloring</option>
+              <option>Facial / Spa</option>
+              <option>Manicure / Pedicure</option>
+              <option>Hairstyle</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell us how we can help…"></textarea>
+          </div>
+          <button class="btn btn-gold form-submit" id="formSubmitBtn" type="button">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/></svg>
+            Send via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          New Look
+          <span>Salon &amp; Beauty Studio</span>
+        </div>
+        <p>A sanctuary of refined beauty, led with passion and over 18 years of expertise. Elevating women across Karachi — one transformation at a time.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/newlook_beauty_saloon" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://wa.me/923022604409" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Skin &amp; Care</a></li>
+          <li><a href="#services">Hands &amp; Feet</a></li>
+          <li><a href="#services">Hair Treatments</a></li>
+          <li><a href="#services">Bridal Makeup</a></li>
+          <li><a href="#services">Party Glam</a></li>
+          <li><a href="#services">Hairstyling</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li><a href="tel:+923022604409">0302 2604409</a></li>
+          <li><a href="https://www.instagram.com/newlook_beauty_saloon" target="_blank">@newlook_beauty_saloon</a></li>
+          <li style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">392 A Rafha e Aam Society,<br>Malir Halt, Karachi</li>
+          <li style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;">Mon – Sun | 11:00 AM – 9:00 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 New Look Salon. All rights reserved. Karachi, Pakistan.</p>
+      <a href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon" target="_blank" rel="noopener">Book Appointment →</a>
+    </div>
   </footer>
 
-  <script>
-    // ── Navbar scroll class ──
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
+  <!-- ============================================================
+       FLOATING WHATSAPP BUTTON
+  ============================================================ -->
+  <div class="whatsapp-float">
+    <div class="whatsapp-tooltip">Book Now on WhatsApp</div>
+    <a
+      href="https://wa.me/923022604409?text=Hello%20I%20would%20like%20to%20book%20an%20appointment%20at%20New%20Look%20Salon"
+      target="_blank" rel="noopener"
+      class="whatsapp-btn"
+      aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.919 0C5.337 0 0 5.337 0 11.919c0 2.089.547 4.06 1.502 5.774L0 24l6.441-1.491A11.875 11.875 0 0011.919 23.84C18.5 23.84 23.84 18.5 23.84 11.919 23.84 5.337 18.5 0 11.919 0zm0 21.793a9.855 9.855 0 01-5.06-1.394l-.362-.216-3.822.885.905-3.724-.234-.38A9.857 9.857 0 012.047 11.92c0-5.445 4.427-9.873 9.872-9.873 5.444 0 9.872 4.428 9.872 9.873 0 5.444-4.428 9.873-9.872 9.873z"/>
+      </svg>
+    </a>
+  </div>
 
-    // ── Hamburger ──
-    const hamburger = document.getElementById('hamburger');
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* -------------------------------------------------------
+       NAVBAR – scroll behaviour
+    ------------------------------------------------------- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* -------------------------------------------------------
+       HAMBURGER MENU
+    ------------------------------------------------------- */
+    const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => {
+
+    function toggleMenu() {
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
-    });
-    function closeMenu() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
     }
 
-    // ── Reveal on scroll ──
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 90);
-          observer.unobserve(e.target);
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggleMenu(); });
+
+    document.querySelectorAll('.mobile-link, .mobile-menu > a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* -------------------------------------------------------
+       TESTIMONIAL SLIDER
+    ------------------------------------------------------- */
+    const slides     = document.getElementById('testimonialSlides');
+    const dotsWrap   = document.getElementById('sliderDots');
+    const prevBtn    = document.getElementById('prevBtn');
+    const nextBtn    = document.getElementById('nextBtn');
+    const totalSlides = document.querySelectorAll('.testimonial-slide').length;
+    let current      = 0;
+    let autoTimer;
+
+    // Build dots
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+
+    function goTo(idx) {
+      current = (idx + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+    function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 5000); }
+    function resetAuto()  { clearInterval(autoTimer); startAuto(); }
+    startAuto();
+
+    // Pause on hover
+    document.querySelector('.testimonials-slider').addEventListener('mouseenter', () => clearInterval(autoTimer));
+    document.querySelector('.testimonials-slider').addEventListener('mouseleave', startAuto);
+
+    // Touch / swipe support
+    let touchStart = 0;
+    slides.addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; }, { passive: true });
+    slides.addEventListener('touchend',   e => {
+      const diff = touchStart - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
+    });
+
+    /* -------------------------------------------------------
+       SCROLL ANIMATIONS (Intersection Observer)
+    ------------------------------------------------------- */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => observer.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* -------------------------------------------------------
+       PARALLAX – hero background
+    ------------------------------------------------------- */
+    const heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight && heroBg) {
+        heroBg.style.transform = `translateY(${y * 0.3}px)`;
+      }
+    }, { passive: true });
+
+    /* -------------------------------------------------------
+       CONTACT FORM – build WhatsApp message
+    ------------------------------------------------------- */
+    document.getElementById('formSubmitBtn').addEventListener('click', () => {
+      const name    = document.getElementById('name').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+
+      let text = 'Hello, I would like to enquire about New Look Salon.';
+      if (name)    text += `\n\nName: ${name}`;
+      if (phone)   text += `\nPhone: ${phone}`;
+      if (service) text += `\nService: ${service}`;
+      if (message) text += `\n\nMessage: ${message}`;
+
+      const url = `https://wa.me/923022604409?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
   </script>
+
 </body>
 </html>
